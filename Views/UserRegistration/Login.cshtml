@@ -1,0 +1,82 @@
+﻿@model WroseModel.View_Model.RegistrationVM
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center">
+                <h1>WROSE</h1><br />
+                <h4>Login</h4>
+            </div>
+        </div>
+    </div>
+    @using (Html.BeginForm("Login", "UserRegistration", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.TextBoxFor(model => model.User_Email, new { @class = "form-control", placeholder = "Email", @Value=ViewBag.Email } )
+                    @Html.ValidationMessageFor(model => model.User_Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="input-group" id="show_hide_password">
+                        @Html.TextBoxFor(model => model.User_Password,  new { @class = "form-control pwd", placeholder = "Password", @type = "password", @Value = ViewBag.Password })
+                        <div class="input-group-addon" style="background-color:lavender">
+                            <a href=""><i class="fas fa-eye-slash" aria-hidden="true"></i></a>
+                        </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.User_Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Rememberme,  new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.CheckBoxFor(model => model.Rememberme,new { @id="chkRemember"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12 text-center">
+                    <input type="submit" value="Login" class="btn btn-primary text-uppercase" />
+                </div>
+            </div>
+        </div>
+    }
+    <div class="text-center">
+        @Html.ActionLink("Forgot password?", "ForgetPassword")
+    </div>
+    <div class="text-center">
+        <h5>Don't have an account? @Html.ActionLink("Register", "Index")</h5>
+    </div>
+    <div class="text-center">
+        @Html.Label("", Convert.ToString((string)ViewBag.DuplicateMessage), new { @class = "text-danger" })
+        @Html.Label("", Convert.ToString((string)ViewBag.SuccessMessage), new { @class = "text-success" })
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#show_hide_password a").on('click', function (event) {
+            event.preventDefault();
+            if ($('#show_hide_password .pwd').attr("type") == "text") {
+                $('#show_hide_password .pwd').attr('type', 'password');
+                $('#show_hide_password i').addClass("fa-eye-slash");
+                $('#show_hide_password i').removeClass("fa-eye");
+            } else if ($('#show_hide_password .pwd').attr("type") == "password") {
+                $('#show_hide_password .pwd').attr('type', 'text');
+                $('#show_hide_password i').removeClass("fa-eye-slash");
+                $('#show_hide_password i').addClass("fa-eye");
+            }
+        });
+    });
+</script>

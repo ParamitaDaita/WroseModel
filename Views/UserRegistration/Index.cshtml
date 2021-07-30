@@ -1,0 +1,131 @@
+﻿@model WroseModel.View_Model.RegistrationVM
+@{
+    ViewBag.Title = "User Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 d-none d-md-block d-lg-block" style="background: url(../Images/WasteManagementjpg.jpg); background-repeat:no-repeat;background-size:cover">
+
+        </div>
+        <div class="col-md-8">
+            <div class="text-center">
+                <h1>Join WROSE</h1>
+                <h4>Already have an account? @Html.ActionLink("Login", "Login", new { }, new { @class = "ui-btn" })</h4>
+            </div>
+            @using (Html.BeginForm("Index", "UserRegistration", FormMethod.Post))
+            {
+                <div class="form-group row">
+                    <div colspan="2">
+                        @if (ViewBag.Failed != null)
+                        {
+                            <span style="color:red;"> @ViewBag.Failed </span>
+                        }
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <input type="radio" id="rdbIndivisual" name="radioSelection" value="1" checked="checked">
+                        <label for="html">Indivisual</label>
+                        <input type="radio" id="rdbCompany" name="radioSelection" value="2">
+                        <label for="css">Company</label><br>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="txtCompany" class="form-control" disabled="disabled" placeholder="Company Name"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(e => e.First_Name, new { @class = "form-control", placeholder = "First Name", @maxlength = "30" }) <br />
+                        @Html.ValidationMessageFor(e => e.First_Name, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(e => e.Last_Name, new { @class = "form-control", placeholder = "Last Name", @maxlength = "30" }) <br />
+                        @Html.ValidationMessageFor(e => e.Last_Name, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(e => e.User_Email, new { @class = "form-control", placeholder = "Email", id = "txtEmail" }) <br />
+                        @Html.ValidationMessageFor(e => e.User_Email, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(e => e.User_Mobile, new { @class = "form-control", placeholder = "Mobile Number", @maxlength = "10" }) <br />
+                        @Html.ValidationMessageFor(e => e.User_Mobile, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(e => e.User_Password, new { @class = "form-control", placeholder = "Password", @type = "password" }) <br />
+                        @Html.ValidationMessageFor(e => e.User_Password, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(e => e.User_ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password", @type = "password" }) <br />
+                        @Html.ValidationMessageFor(e => e.User_ConfirmPassword, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12 text-center">
+                        <input type="submit" value="Register" class="btn btn-primary text-uppercase" />
+                    </div>
+                </div>
+            }
+            <div class="text-center">
+                @Html.Label("", Convert.ToString((string)ViewBag.DuplicateMessage), new { @class = "text-danger" })
+                @Html.Label("", Convert.ToString((string)ViewBag.SuccessMessage), new { @class = "text-success" })
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('input[type=radio][name=radioSelection]').change(function () {
+        if (this.value == '1') {
+            $('#txtCompany').prop('disabled', true);
+        }
+        else if (this.value == '2') {
+            $('#txtCompany').prop('disabled', false);
+        }
+    });
+    function validCharacters() {
+        var code = (event.which) ? event.which : event.keyCode;
+        if ((code >= 65 && code <= 90) ||
+            (code >= 97 && code <= 122) || (code == 32))
+        {
+            return true;
+        }
+        else { $("#txtFirstName" ).val("");}
+    }
+    $(document).ready(function () {
+        @*$("#txtEmail").blur(function () {
+            debugger;
+            var userEmail=$("#txtEmail").val();
+            alert(userEmail);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetUserByEmail", "UserRegistration")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ email: userEmail }),
+                dataType: "json",
+                success: function (response) {
+                    if (response != null) {
+                        alert("<label class='text-danger'>Email address " + response +" already exists, please use a different email address.</label>");
+
+                    } else {
+                        alert("Something went wrong");
+                    }
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        });*@
+    });
+</script>

@@ -1,0 +1,21 @@
+﻿body {
+}
+.btnWasteTech {
+    white-space: normal !important;
+    max-width: 200px;
+    min-height: 70px;
+}
+a.projectLink:active{
+    color:purple;
+}
+.form-group .required:after {
+    content: "*";
+    color: red;
+}
+#droppable {
+    width: 700px;
+    height: 350px;
+    padding: 0.5em;
+    float: left;
+    margin: 10px;
+}

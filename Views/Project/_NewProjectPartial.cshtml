@@ -1,0 +1,196 @@
+﻿@model WroseModel.View_Model.ProjectVM
+<div class="row" id="newProjectPartial">
+    <div class="col-md-12">
+        <div class="text-center">
+            <h4>Project Information</h4>
+            <h6>Note to the user: The following information will automatically migrate to the Project Report</h6>
+        </div>
+         
+        @using (Html.BeginForm("NewProject", "Project", FormMethod.Post))
+        {
+            @*<div class="tab">*@
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <label for="Project Name" class="control-label required">Project Name</label>
+                    @Html.TextBoxFor(e => e.Project_Name, new { @class = "form-control", placeholder = "Project Name", @maxlength = "30", @spellcheck = "true" }) <br />
+                    @Html.ValidationMessageFor(e => e.Project_Name, null, new { @class = "text-danger" })
+                    @Html.TextBoxFor(e => e.ID, new { @type = "hidden" })
+                    @Html.TextBoxFor(e => e.User_Reg_ID, new { @type = "hidden" })
+                    @Html.TextBoxFor(e => e.Created_Date, new { @type = "hidden" })
+                </div>
+                <div class="col-md-4">
+                    <label for="Study Year" class="control-label required">Study Year</label>
+                    @Html.TextBoxFor(e => e.Study_Year, new { @class = "form-control", placeholder = "Study Year", @maxlength = "30", @spellcheck = "true" }) <br />
+                    @Html.ValidationMessageFor(e => e.Study_Year, null, new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    <label for="Client Name" class="control-label required">Client Name</label>
+                    @Html.TextBoxFor(e => e.Client_Name, new { @class = "form-control", placeholder = "Client Name", id = "txtClientName", @spellcheck = "true" }) <br />
+                    @Html.ValidationMessageFor(e => e.Client_Name, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <label for="Author Name" class="control-label required">Author Name</label>
+                    @Html.TextBoxFor(e => e.Author_Name, new { @class = "form-control", placeholder = "Author Name", @maxlength = "20", @spellcheck = "true" }) <br />
+                    @Html.ValidationMessageFor(e => e.Author_Name, null, new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    <label for="Author company" class="control-label required">Author company</label>
+                    @Html.TextBoxFor(e => e.Author_company, new { @class = "form-control", placeholder = "Author company", @spellcheck = "true" }) <br />
+                    @Html.ValidationMessageFor(e => e.Author_company, null, new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    <label for="Local Auth Study" class="control-label required">Local Auth Study</label>
+                    @Html.TextBoxFor(e => e.Local_Auth_Study, new { @class = "form-control", placeholder = "Local Auth Study", @spellcheck = "true" }) <br />
+                    @Html.ValidationMessageFor(e => e.Local_Auth_Study, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <label for="Project Desc" class="control-label required">Project Description</label>
+                    @Html.TextAreaFor(e => e.Project_Desc, new { @class = "form-control", placeholder = "Project Desc", @maxlength = "100", @spellcheck = "true" }) <br />
+                    @Html.ValidationMessageFor(e => e.Project_Desc, null, new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    <label for="Stusy Purpose" class="control-label required">Stusy Purpose</label>
+                    @Html.TextAreaFor(e => e.Stusy_Purpose, new { @class = "form-control", placeholder = "Stusy Purpose", @maxlength = "100", @spellcheck = "true" }) <br />
+                    @Html.ValidationMessageFor(e => e.Stusy_Purpose, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <label for="Key Assumption" class="control-label required">Key Assumption</label>
+                    @Html.TextAreaFor(e => e.Key_Assumption, new { @class = "form-control", placeholder = "Key Assumption", @maxlength = "100", @spellcheck = "true" }) <br />
+                    @Html.ValidationMessageFor(e => e.Key_Assumption, null, new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    <label for="Limitation of study" class="control-label required">Limitation of study</label>
+                    @Html.TextAreaFor(e => e.Study_Limitation, new { @class = "form-control", placeholder = "Limitation of study", @maxlength = "100", @spellcheck = "true" }) <br />
+                    @Html.ValidationMessageFor(e => e.Study_Limitation, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-12 text-center">
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="modal fade" id="clientModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                <h5 class="modal-title float-left" id="myModalLabel">Select Client</h5>
+            </div>
+            <div class="modal-body">
+                <form id="frmClient" action="#" method="post">
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <input type="radio" id="rdbList" name="rdbSelect" checked="checked" /> Select from list
+                            <input type="radio" id="rdbText" name="rdbSelect" /> Enter client name
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:block" id="divDropdown">
+                        <div class="col-md-12">
+                            @Html.DropDownList("Provience", (List<SelectListItem>)ViewBag.Provience, new { @class = "form-control", @id = "ddlProvience" })
+                        </div>
+                        <div class="col-md-12">
+                            @Html.DropDownList("Minicipality", new SelectList(string.Empty, "Value", "Text"), "--Select Municipality--", new { @class = "form-control", @id = "ddlMunicipality", disabled = "disabled" })
+                            @Html.Label("Please select municipality",new {@class="text-danger",@id="lblError" })
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none" id="divText">
+                        <div class="col-md-12">
+                            <input type="text" id="txtClient" class="form-control" placeholder="Enter client name" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <span class="error"></span>
+                <button type="button" class="btn btn-default text-uppercase" data-dismiss="modal">Close</button>
+                <button id="btnSubmit" type="button" class="btn btn-primary text-uppercase">Select</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.validator.unobtrusive.parse($("form"));
+        $('#lblError').hide();
+        $("#ddlProvience").change(function () {
+            var provienceId = $(this).val();
+            $.ajax({
+                type: "Post",
+                url: "/Project/GetMunicipalityList?ProvienceId=" + provienceId,
+                contentType: "html",
+                success: function (response) {
+                    $("#ddlMunicipality").empty();
+                    $("#ddlMunicipality").append('<option value="0">--Select Municipality--</option>');
+                    $.each(response, function (i, response) {
+                        $("#ddlMunicipality").append('<option value="' + response.Value + '">' +
+                            response.Text + '</option>');
+
+                    });
+                    if ($("#ddlMunicipality option").length > 1) {
+                        $("#ddlMunicipality").attr("disabled", false);
+                    }
+                    else {
+                        $("#ddlMunicipality").attr("disabled", true);
+                    }
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve municipality data.' + ex);
+                }
+
+            })
+        })
+        $("#ddlMunicipality").change(function () {
+            if ($("#ddlMunicipality option:selected").val() > 0) {
+                $('#lblError').hide();
+            }
+        })
+
+            
+        $('#btnSubmit').click(function () {
+            if ($("#rdbList").is(":checked")) {
+                if ($("#ddlMunicipality option:selected").val() == 0) {
+                    $('#lblError').show();
+                }
+                else {
+                    $('#txtClientName').val($('#ddlMunicipality :selected').text());
+                    $('#lblError').hide();
+                    $('#frmClient').trigger('reset');
+                    $("#clientModal").modal('hide');
+                }
+
+            } else {
+                $('#txtClientName').val($('#txtClient').val());
+                $('#frmClient').trigger('reset');
+                $("#clientModal").modal('hide');
+            }
+            
+        })
+        $("input[name='rdbSelect']").click(function () {
+            if ($("#rdbList").is(":checked")) {
+                $("#divDropdown").show();
+                $("#divText").hide();
+            } else {
+                $("#divDropdown").hide();
+                $("#divText").show();
+
+            }
+        });
+    });
+    $('#txtClientName').focus(function () {
+        //open bootsrap modal
+        $('#clientModal').modal({
+            show: true
+        });
+        $("#ddlMunicipality").attr("disabled", true);
+    });
+
+</script>

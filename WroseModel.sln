@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WroseModel", "WroseModel.csproj", "{E25C3C55-8038-416C-8B7A-CE79B327944B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E25C3C55-8038-416C-8B7A-CE79B327944B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E25C3C55-8038-416C-8B7A-CE79B327944B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E25C3C55-8038-416C-8B7A-CE79B327944B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E25C3C55-8038-416C-8B7A-CE79B327944B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D069AAAA-1A11-4F34-BCA1-8D4B7CD152EB}
+	EndGlobalSection
+EndGlobal

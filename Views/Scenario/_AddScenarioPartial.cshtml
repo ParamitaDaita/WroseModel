@@ -1,0 +1,433 @@
+﻿@model WroseModel.View_Model.ScenarioVM
+<style>
+    #droppable {
+        position: relative;
+        resize: both;
+        border: 1px solid #aaaaaa;
+        width: 800px;
+        height: 650px;
+        overflow-x: scroll;
+        overflow-y: scroll;
+    }
+
+    .connector {
+        color: black;
+        font-size: 10px;
+        text-align: center;
+        width: 100%;
+        height: 20px;
+        /* background-color: #ffffff;*/
+        cursor: pointer;
+    }
+
+    .element {
+        border: 1px solid gray;
+        text-align: center;
+        width: 170px;
+        height: 75px;
+        background-color: lightpink;
+        position: absolute;
+    }
+
+    .pro {
+        border: 1px solid gray;
+        text-align: center;
+        width: 170px;
+        height: 75px;
+        background-color: lightgray;
+        position: absolute;
+    }
+
+    .section {
+        font-size: 12px;
+        text-align: center;
+        font-weight: 200;
+        border: 1px solid black;
+        background-color: #ddddff;
+    }
+</style>
+@*<div class="row">
+        <div class="col-md-12">
+            <div class="text-center">
+                <h4>Add Scenario</h4>
+            </div>
+        </div>
+    </div>*@
+@*<div class="row">
+    <div class="col-md-12">*@
+<div id="divScenario" class="form-group row">
+    <div class="col-md-6">
+        <input type="button" id="btnCreateScenario" value="Create Scenario" class="btn btn-primary" />
+        <input type="button" id="btnDefaultScenario" value="Default Scenario" class="btn btn-primary" />
+    </div>
+    <div class="col-md-6"></div>
+</div>
+<div id="divCategory" class="form-group row">
+    <div class="col-md-12">
+    </div>
+</div>
+<div id="divDefaultScenario" class="form-group row">
+    
+    @*<div class="col-md-12">
+        </div>*@
+</div>
+<img id="ScenarioPreview" src="" />
+<div id="divWasteTech" class="form-group row">
+
+</div>
+<div id="droppable" class="">
+</div>
+<div class="form-group text-right" id="divButton">
+    <button id="btnNext" name="btnNext" type="button" class="btn btn-primary">Next</button>
+</div>
+<div id="divScenarioInfo" class="row">
+    <div class="col-md-12">
+        <h4>Scenario Info</h4>
+    </div>
+    <div class="col-md-12">
+        <input type="text" id="txtScenarioName" placeholder="Title" class="form-control" />
+    </div>
+    <div class="col-md-12">
+        <input type="checkbox" id="chkBaseScenario" name="chkBaseScenario" />
+        <label for="chkBaseScenario">Make base scenario</label>
+    </div>
+    <div class="col-md-12 text-right">
+        <button id="btnSaveScenario" name="btnSaveScenario" type="button" class="btn btn-primary">Submit</button>
+    </div>
+</div>
+
+@*</div>
+    </div>*@
+@*@using (Html.BeginForm("AddScenario", "Scenario", FormMethod.Post))
+    {
+        <div class="form-group row">
+            <div class="col-md-4">
+                @Html.TextBoxFor(e => e.Scenario_Name, new { @class = "form-control", placeholder = "Scanario Name", @maxlength = "30" }) <br />
+                @Html.ValidationMessageFor(e => e.Scenario_Name, null, new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                @if (ViewBag.Project != null)
+                {
+                    @Html.DropDownList("Project", (List<SelectListItem>)ViewBag.Project, new { @class = "form-control", @id = "ddlProject" })
+                    @Html.ValidationMessageFor(e => e.Project_Name, null, new { @class = "text-danger" })
+                }
+            </div>
+            <div class="col-md-4">
+                @if (ViewBag.Category != null)
+                {
+                    @Html.DropDownList("Category", (List<SelectListItem>)ViewBag.Category, new { @class = "form-control", @id = "ddlCategory" })
+                    @Html.ValidationMessageFor(e => e.Category_Name, null, new { @class = "text-danger" })
+                }
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-4">
+                @if (ViewBag.WasteTech != null)
+                {
+                    @Html.DropDownList("WasteTech", (List<SelectListItem>)ViewBag.WasteTech, new { @class = "form-control", @id = "ddlWasteTech" })
+                    @Html.ValidationMessageFor(e => e.Waste_Tech_Name, null, new { @class = "text-danger" })
+                }
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(e => e.Waste_Tech_Order, new { @class = "form-control", placeholder = "Order" }) <br />
+                @Html.ValidationMessageFor(e => e.Waste_Tech_Order, null, new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-12 text-center">
+                <input type="submit" value="Submit" class="btn btn-primary text-uppercase" />
+            </div>
+        </div>
+    }*@
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#divScenarioInfo').hide();
+    });
+    //$(function () {
+    //    $("#divDraggable").draggable();
+    //});
+    //$(document).ready(function () {
+    //    $("#divWasteTech .btnWasteTech").draggable({
+    //        cancel: false
+    //    });
+    //});
+    $(function () {
+        @*$('#btnCreateScenario').click(function (data) {
+            $('#divDefaultScenario').hide();
+                $.post("@Url.Action("CategoryList", "Scenario")", function (data) {
+                    $('#btnCreateScenario').css("backgroundColor", "purple");
+                    $('#btnDefaultScenario').css("background-color", "#007bff");
+                    if (data) {
+                        $('#divCategory').show();
+                        $('#divCategory').html('');
+                        //$('#divScenario').append('<tr class="row">')
+                        $.each(data, function (i, data) {
+                            $("#divCategory").append('<div class="col-md-4"><button class="btn btn-primary text-uppercase btnCategory" type="button" id=btn' + data.Text + ' value='+data.Value+' OnClick="fillWasteTech(this);">' +
+                                data.Text + '</button></div>');
+                        });
+                    }
+                });
+            });*@
+        $('#btnDefaultScenario').click(function (data) {
+            $('#divCategory').hide();
+            $('#divWasteTech').hide();
+            $('#droppable').hide();
+            $('#divScenarioInfo').hide();
+            $('#divButton').hide();
+                $.post("@Url.Action("ScenarioList", "Scenario")", function (data) {
+                    $('#btnDefaultScenario').css("backgroundColor", "purple");
+                    $('#btnCreateScenario').css("background-color", "#007bff");
+                    if (data) {
+                        $('#divDefaultScenario').show();
+                        $('#divDefaultScenario').html('');
+                        //$('#divScenario').append('<tr class="row">')
+                        $.each(data, function (i, data) {
+                            $("#divDefaultScenario").append('<div class="col-md-3"><button class="btn btn-primary btnScenario" type="button" id=btn' + data.Text + ' value=' + data.Value +' OnClick="fillScenario(this);">' +
+                                data.Text + '</button></div>');
+                        });
+                    }
+                });
+            });
+        });
+    function fillWasteTech(btn) {
+        var categoryId = $(btn).attr('value');
+        localStorage.setItem('categoryId', categoryId);
+        $('.btnCategory').css("backgroundColor", "");
+        $.ajax
+            ({
+                url: "@Url.Action("WasteTechListByCategory", "Scenario")",
+                data: { "CategoryID": categoryId },
+                type: 'post',
+                success: function (result) {
+                    $(btn).css("backgroundColor","purple");
+                    if (result) {
+                        $('#divWasteTech').html('');
+                        //$('#divWasteTech').append('<tr class="row">')
+                        $.each(result, function (i, result) {
+                            $("#divWasteTech").append('<div class="col-md-3 divDraggable" id="divDraggable'+i+'"><button class="btn btn-default btn-xs btnWasteTech" type="button" data-name="'+result.Text+'" value=' + result.Value + '>' +
+                                result.Text + '</button></div>');
+                        });
+                        $(".divDraggable").draggable({
+                            helper: 'clone'
+                        });
+                    }
+                }
+            });
+    }
+    function fillScenario(btn) {
+        var scenarioId = $(btn).attr('value');
+        $('.btnScenario').css("backgroundColor", "");
+        $.ajax
+            ({
+                url: "@Url.Action("ScenarioDetailsByScenarioID", "Scenario")",
+                data: { "ScenarioID": scenarioId },
+                type: 'post',
+                success: function (Image) {
+                    $(btn).css("backgroundColor","purple");
+                    if (Image != null) {
+                        $("#ScenarioPreview").attr('src', 'data:image/jpeg;base64, ' + Image.Image);
+                    }
+                }
+            });
+    }
+    //var count = 0;
+    //var duplicate = 0;
+    //var results = [];
+    //$("#droppable").droppable({
+    //    drop: function (event, ui) {
+    //        var id = $(ui.draggable).attr("id");
+    //        if (results.length == 0) {
+    //            results.push(id);
+    //            count = count + 1;
+    //            $(this)
+    //                .addClass("ui-state-highlight")
+    //                .find("button")
+    //                .html("Dropped!");
+    //            $("#" + id).append('<input id="txt' + id + '" type="text" style="width:50px" />');
+    //        }
+    //        else {
+    //            for (var i = 0; i < results.length; i++) {
+    //                if (results[i] === id) {
+    //                    duplicate = 1;
+    //                }
+    //            }
+    //            if (duplicate==1) {
+    //                alert('Item already exist');
+    //            }
+    //                else {
+    //                    results.push(id);
+    //                    count = count + 1;
+    //                    $(this)
+    //                        .addClass("ui-state-highlight")
+    //                        .find("button")
+    //                        .html("Dropped!");
+    //                $("#" + id).append('<input id="txt' + id + '" type="text" style="width:50px" />');
+    //                }
+    //        }
+    //        if (results.length >= 2) {
+    //            for (var n = 0; n < results.length;n++) {
+    //                jsPlumb.connect({
+    //                    source: results[n],
+    //                    target: results[n+1],
+    //                    connector: ["Flowchart", { cornerRadius: 15 }]
+    //                });
+    //            }
+
+    //        }
+    //    },
+    //    out: function (event, ui) {
+    //        count = count - 1;
+    //        $(this)
+    //            .addClass("ui-state-highlight")
+    //            .find("button")
+    //            .html("Out!");
+    //        $("#count").text(count);
+    //    }
+    //});
+</script>
+<script>
+    var numberOfElements = 0;
+    jsPlumb.ready(function () {
+
+        jsPlumb.Defaults.Container = $("#droppable");
+        jsPlumb.Defaults.PaintStyle = {
+            strokeStyle: "palevioletred", lineWidth: 2,
+            dashstyle: '3 3'
+        };
+        jsPlumb.Defaults.EndpointStyle = { radius: 7, fillStyle: "palevioletred" };
+        jsPlumb.importDefaults({ Connector: ["Bezier", { curviness: 50 }] });
+        jsPlumb.setContainer($('#droppable'));
+        var i = 1;
+        //$(".divDraggable").draggable({
+        //    helper: 'clone',
+        //    cursor: 'pointer',
+        //    tolerance: 'fit',
+        //    revert: true
+        //});
+
+        $("#droppable").droppable({
+            accept: '.divDraggable',
+            containment: 'droppable',
+
+            drop: function (e, ui) {
+                droppedElement = ui.helper.clone();
+                ui.helper.remove();
+                $(droppedElement).removeAttr("class");
+                jsPlumb.repaint(ui.helper);
+
+                var newAgent = $('<div>').attr('id', 'pro' + i).attr('data-value', $(ui.draggable).find('button').attr('value')).addClass('pro');
+                newAgent.text($(ui.draggable).find('button').attr('data-name'));
+                //newAgent.text('Element ' + i);
+                $(droppedElement).draggable({ containment: "droppable" });
+                $('#droppable').append(newAgent);
+
+                jsPlumb.draggable(newAgent, {
+                    containment: 'parent'
+                });
+                numberOfElements = numberOfElements + 1;
+                i++;
+            }
+        });
+
+        $("#droppable").on('click', '.pro', function (e) {
+            i++;
+            var newState = $('<div>').attr('id', 'state' + i).addClass('section');
+
+            //var title = $('<div>').addClass('title');
+            var connector = $('<div>').addClass('connector').
+                text('Click here to drag');
+
+            //newState.css({
+            //    'top': e.pageY,
+            //    'left': e.pageX
+            //});
+
+            // newState.append(title);
+            newState.append(connector);
+
+            $(this).append(newState);
+
+            jsPlumb.makeTarget(newState, {
+                anchor: 'Continuous'
+            });
+
+            jsPlumb.makeSource(connector, {
+                anchor: 'Continuous'
+            });
+
+            newState.dblclick(function (e) {
+                jsPlumb.detachAllConnections($(this));
+                $(this).remove();
+                e.stopPropagation();
+            });
+        });
+    });
+    $('#btnNext').click(function () {
+        saveFlowchartMVC();
+    });
+    $('#btnSaveScenario').click(function () {
+        var jsonData =
+        {
+            diagramData: localStorage.getItem('savediagram'),
+            scenarioName: $('#txtScenarioName').val()
+        }
+        $.ajax("/Scenario/SaveScenarioDiagram", {
+            type: 'post',
+            dataType: 'json',
+            data: jsonData,
+            success: function (response) {
+                if (response != null) {
+                    location.reload(true);
+                } else {
+                    alert("Something went wrong");
+                }
+            }
+        });
+    });
+    function saveFlowchartMVC() {
+        saveFlowchart();
+        
+    }
+    function saveFlowchart() {
+        var nodes = []
+        $("#droppable .pro").each(function (idx, elem) {
+            var $elem = $(elem);
+            var endpoints = jsPlumb.getEndpoints($elem.attr('id'));
+            nodes.push({
+                blockId: $elem.attr('id'),
+                wasteTechId: $elem.attr('data-value'),
+                //nodetype: $elem.attr('data-nodetype'),
+                positionX: parseInt($elem.css("left"), 10),
+                positionY: parseInt($elem.css("top"), 10)
+            });
+        });
+        var connections = [];
+        $.each(jsPlumb.getConnections(), function (idx, connection) {
+            connections.push({
+                connectionId: connection.id,
+                pageSourceId: connection.sourceId,
+                pageTargetId: connection.targetId
+            });
+        });
+        var flowChart = {};
+        flowChart.nodes = nodes;
+        flowChart.connections = connections;
+        flowChart.numberOfElements = numberOfElements;
+        flowChart.categoryId = localStorage.getItem('categoryId');
+        var flowChartJson = JSON.stringify(flowChart);
+        //console.log(flowChartJson);
+        alert(flowChartJson);
+        localStorage.setItem('savediagram', flowChartJson);
+        // $('#jsonOutput').val(flowChartJson);
+        $('#divScenarioInfo').show();
+        $('#droppable').hide();
+        $('#divButton').hide();
+        $('#divWasteTech').hide();
+        $('#divCategory').hide();
+    }
+</script>

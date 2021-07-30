@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0c4f7aeeac1548ffa4e6ff62f854a9aa" Name="Diagram1">
+        <EntityTypeShape EntityType="WROSEModel.Category_Master" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WROSEModel.Municipality_Master" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="WROSEModel.Project_Details" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WROSEModel.Provience_Master" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="WROSEModel.Scenario_Connection_Details" Width="1.5" PointX="9.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WROSEModel.Scenario_Details" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="WROSEModel.Scenario_Master" Width="1.5" PointX="5.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WROSEModel.Scenario_Node_details" Width="1.5" PointX="12.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WROSEModel.User_Permission_Master" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WROSEModel.User_Registration" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WROSEModel.User_Role_Master" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WROSEModel.User_Role_Permission" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WROSEModel.Waste_Mat_Details" Width="1.5" PointX="10.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WROSEModel.Waste_Mat_Master" Width="1.5" PointX="8.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WROSEModel.Waste_tech_Master" Width="1.5" PointX="10.5" PointY="2.625" IsExpanded="true" />
+        <AssociationConnector Association="WROSEModel.FK__Scenario___Categ__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="WROSEModel.FK__Waste_tec__Categ__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="WROSEModel.FK_Provience_Master_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="WROSEModel.FK_Project_Detail_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="WROSEModel.FK_Project_Details_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="WROSEModel.FK_User_Reg_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="WROSEModel.FK_Scenario_Connection_Details_Scenario_Details" ManuallyRouted="false" />
+        <AssociationConnector Association="WROSEModel.FK_Scenario_Node_details_Scenario_Details1" ManuallyRouted="false" />
+        <AssociationConnector Association="WROSEModel.FK_Scenario_Node_details_Scenario_Details" ManuallyRouted="false" />
+        <AssociationConnector Association="WROSEModel.FK_User_Permission_Master_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="WROSEModel.FK_User_Role_Master_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="WROSEModel.FK__User_Role_Master_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="WROSEModel.FK_Waste_Mat_Master_ID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

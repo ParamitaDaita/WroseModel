@@ -1,0 +1,1070 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WROSEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="Created_Date" Type="date" />
+          <Property Name="Modified_Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Municipality_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Municipality_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Provience_Master_ID" Type="int" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="Created_Date" Type="date" />
+          <Property Name="Modified_Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Project_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Project_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Study_Year" Type="int" Nullable="false" />
+          <Property Name="Client_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Author_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Author_company" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Local_Auth_Study" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Project_Desc" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Stusy_Purpose" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Key_Assumption" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Study_Limitation" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="User_Reg_ID" Type="int" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="Created_Date" Type="date" />
+          <Property Name="Modified_Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Provience_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Provience_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="Created_Date" Type="date" />
+          <Property Name="Modified_Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Scenario_Connection_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Scenario_ID" Type="int" Nullable="false" />
+          <Property Name="Connection_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Page_Source_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Page_Target_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Scenario_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Project_ID" Type="int" Nullable="false" />
+          <Property Name="Scenario_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="Created_Date" Type="date" />
+          <Property Name="Modified_Date" Type="date" />
+          <Property Name="Created_By" Type="int" />
+          <Property Name="Modified_By" Type="int" />
+          <Property Name="IsDefault" Type="tinyint" />
+          <Property Name="Category_ID" Type="int" Nullable="false" />
+          <Property Name="Number_Of_Elements" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Scenario_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Scenario_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Image_File" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Scenario_Node_details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Scenario_ID" Type="int" Nullable="false" />
+          <Property Name="Block_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Waste_Tech_ID" Type="int" Nullable="false" />
+          <Property Name="Position_X" Type="int" Nullable="false" />
+          <Property Name="Position_Y" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Permission_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Permimssion_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="page_URL" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="Created_Date" Type="date" />
+          <Property Name="Modified_Date" Type="date" />
+        </EntityType>
+        <EntityType Name="User_Registration">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="First_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="User_Mobile" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="User_Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="User_Role_ID" Type="int" Nullable="false" />
+          <Property Name="Created_Date" Type="date" />
+          <Property Name="Modified_Date" Type="date" />
+        </EntityType>
+        <EntityType Name="User_Role_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="Created_Date" Type="date" />
+          <Property Name="Modified_Date" Type="date" />
+        </EntityType>
+        <EntityType Name="User_Role_Permission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Role_ID" Type="int" Nullable="false" />
+          <Property Name="User_Permission_ID" Type="int" Nullable="false" />
+          <Property Name="Created_Date" Type="date" />
+          <Property Name="Modified_Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Waste_Mat_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Project_ID" Type="int" Nullable="false" />
+          <Property Name="Waste_Mat_ID" Type="int" Nullable="false" />
+          <Property Name="Waste_Mat_Amt" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Waste_mat_Percentage" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Waste_Amt" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="Created_Date" Type="date" />
+          <Property Name="Modified_Date" Type="date" />
+          <Property Name="Created_By" Type="int" />
+          <Property Name="Modified_By" Type="int" />
+        </EntityType>
+        <EntityType Name="Waste_Mat_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Waste_Mat_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="Created_Date" Type="date" />
+          <Property Name="Modified_Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Waste_tech_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Waste_Tech_Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="Created_Date" Type="date" />
+          <Property Name="Modified_Date" Type="date" />
+          <Property Name="Category_Master_ID" Type="int" />
+        </EntityType>
+        <Association Name="FK__Scenario___Categ__5DCAEF64">
+          <End Role="Category_Master" Type="Self.Category_Master" Multiplicity="1" />
+          <End Role="Scenario_Details" Type="Self.Scenario_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Scenario_Details">
+              <PropertyRef Name="Category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Role_Master_ID">
+          <End Role="User_Role_Master" Type="Self.User_Role_Master" Multiplicity="1" />
+          <End Role="User_Role_Permission" Type="Self.User_Role_Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Role_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Role_Permission">
+              <PropertyRef Name="User_Role_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Waste_tec__Categ__5535A963">
+          <End Role="Category_Master" Type="Self.Category_Master" Multiplicity="0..1" />
+          <End Role="Waste_tech_Master" Type="Self.Waste_tech_Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Waste_tech_Master">
+              <PropertyRef Name="Category_Master_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Detail_ID">
+          <End Role="Project_Details" Type="Self.Project_Details" Multiplicity="1" />
+          <End Role="Scenario_Details" Type="Self.Scenario_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project_Details">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Scenario_Details">
+              <PropertyRef Name="Project_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Details_ID">
+          <End Role="Project_Details" Type="Self.Project_Details" Multiplicity="1" />
+          <End Role="Waste_Mat_Details" Type="Self.Waste_Mat_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project_Details">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Waste_Mat_Details">
+              <PropertyRef Name="Project_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provience_Master_ID">
+          <End Role="Provience_Master" Type="Self.Provience_Master" Multiplicity="1" />
+          <End Role="Municipality_Master" Type="Self.Municipality_Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provience_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Municipality_Master">
+              <PropertyRef Name="Provience_Master_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scenario_Connection_Details_Scenario_Details">
+          <End Role="Scenario_Details" Type="Self.Scenario_Details" Multiplicity="1" />
+          <End Role="Scenario_Connection_Details" Type="Self.Scenario_Connection_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scenario_Details">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Scenario_Connection_Details">
+              <PropertyRef Name="Scenario_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scenario_Node_details_Scenario_Details">
+          <End Role="Waste_tech_Master" Type="Self.Waste_tech_Master" Multiplicity="1" />
+          <End Role="Scenario_Node_details" Type="Self.Scenario_Node_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Waste_tech_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Scenario_Node_details">
+              <PropertyRef Name="Waste_Tech_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scenario_Node_details_Scenario_Details1">
+          <End Role="Scenario_Details" Type="Self.Scenario_Details" Multiplicity="1" />
+          <End Role="Scenario_Node_details" Type="Self.Scenario_Node_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scenario_Details">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Scenario_Node_details">
+              <PropertyRef Name="Scenario_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Permission_Master_ID">
+          <End Role="User_Permission_Master" Type="Self.User_Permission_Master" Multiplicity="1" />
+          <End Role="User_Role_Permission" Type="Self.User_Role_Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Permission_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Role_Permission">
+              <PropertyRef Name="User_Permission_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Reg_ID">
+          <End Role="User_Registration" Type="Self.User_Registration" Multiplicity="1" />
+          <End Role="Project_Details" Type="Self.Project_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Registration">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Project_Details">
+              <PropertyRef Name="User_Reg_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role_Master_ID">
+          <End Role="User_Role_Master" Type="Self.User_Role_Master" Multiplicity="1" />
+          <End Role="User_Registration" Type="Self.User_Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Role_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Registration">
+              <PropertyRef Name="User_Role_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Waste_Mat_Master_ID">
+          <End Role="Waste_Mat_Master" Type="Self.Waste_Mat_Master" Multiplicity="1" />
+          <End Role="Waste_Mat_Details" Type="Self.Waste_Mat_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Waste_Mat_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Waste_Mat_Details">
+              <PropertyRef Name="Waste_Mat_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WROSEModelStoreContainer">
+          <EntitySet Name="Category_Master" EntityType="Self.Category_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Municipality_Master" EntityType="Self.Municipality_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project_Details" EntityType="Self.Project_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provience_Master" EntityType="Self.Provience_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scenario_Connection_Details" EntityType="Self.Scenario_Connection_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scenario_Details" EntityType="Self.Scenario_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scenario_Master" EntityType="Self.Scenario_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scenario_Node_details" EntityType="Self.Scenario_Node_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Permission_Master" EntityType="Self.User_Permission_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Registration" EntityType="Self.User_Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Role_Master" EntityType="Self.User_Role_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Role_Permission" EntityType="Self.User_Role_Permission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Waste_Mat_Details" EntityType="Self.Waste_Mat_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Waste_Mat_Master" EntityType="Self.Waste_Mat_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Waste_tech_Master" EntityType="Self.Waste_tech_Master" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Scenario___Categ__5DCAEF64" Association="Self.FK__Scenario___Categ__5DCAEF64">
+            <End Role="Category_Master" EntitySet="Category_Master" />
+            <End Role="Scenario_Details" EntitySet="Scenario_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Role_Master_ID" Association="Self.FK__User_Role_Master_ID">
+            <End Role="User_Role_Master" EntitySet="User_Role_Master" />
+            <End Role="User_Role_Permission" EntitySet="User_Role_Permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Waste_tec__Categ__5535A963" Association="Self.FK__Waste_tec__Categ__5535A963">
+            <End Role="Category_Master" EntitySet="Category_Master" />
+            <End Role="Waste_tech_Master" EntitySet="Waste_tech_Master" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Detail_ID" Association="Self.FK_Project_Detail_ID">
+            <End Role="Project_Details" EntitySet="Project_Details" />
+            <End Role="Scenario_Details" EntitySet="Scenario_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Details_ID" Association="Self.FK_Project_Details_ID">
+            <End Role="Project_Details" EntitySet="Project_Details" />
+            <End Role="Waste_Mat_Details" EntitySet="Waste_Mat_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provience_Master_ID" Association="Self.FK_Provience_Master_ID">
+            <End Role="Provience_Master" EntitySet="Provience_Master" />
+            <End Role="Municipality_Master" EntitySet="Municipality_Master" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scenario_Connection_Details_Scenario_Details" Association="Self.FK_Scenario_Connection_Details_Scenario_Details">
+            <End Role="Scenario_Details" EntitySet="Scenario_Details" />
+            <End Role="Scenario_Connection_Details" EntitySet="Scenario_Connection_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scenario_Node_details_Scenario_Details" Association="Self.FK_Scenario_Node_details_Scenario_Details">
+            <End Role="Waste_tech_Master" EntitySet="Waste_tech_Master" />
+            <End Role="Scenario_Node_details" EntitySet="Scenario_Node_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scenario_Node_details_Scenario_Details1" Association="Self.FK_Scenario_Node_details_Scenario_Details1">
+            <End Role="Scenario_Details" EntitySet="Scenario_Details" />
+            <End Role="Scenario_Node_details" EntitySet="Scenario_Node_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Permission_Master_ID" Association="Self.FK_User_Permission_Master_ID">
+            <End Role="User_Permission_Master" EntitySet="User_Permission_Master" />
+            <End Role="User_Role_Permission" EntitySet="User_Role_Permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Reg_ID" Association="Self.FK_User_Reg_ID">
+            <End Role="User_Registration" EntitySet="User_Registration" />
+            <End Role="Project_Details" EntitySet="Project_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role_Master_ID" Association="Self.FK_User_Role_Master_ID">
+            <End Role="User_Role_Master" EntitySet="User_Role_Master" />
+            <End Role="User_Registration" EntitySet="User_Registration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Waste_Mat_Master_ID" Association="Self.FK_Waste_Mat_Master_ID">
+            <End Role="Waste_Mat_Master" EntitySet="Waste_Mat_Master" />
+            <End Role="Waste_Mat_Details" EntitySet="Waste_Mat_Details" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WROSEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="Created_Date" Type="DateTime" Precision="0" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Scenario_Details" Relationship="Self.FK__Scenario___Categ__5DCAEF64" FromRole="Category_Master" ToRole="Scenario_Details" />
+          <NavigationProperty Name="Waste_tech_Master" Relationship="Self.FK__Waste_tec__Categ__5535A963" FromRole="Category_Master" ToRole="Waste_tech_Master" />
+        </EntityType>
+        <EntityType Name="Municipality_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Municipality_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Provience_Master_ID" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="Created_Date" Type="DateTime" Precision="0" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Provience_Master" Relationship="Self.FK_Provience_Master_ID" FromRole="Municipality_Master" ToRole="Provience_Master" />
+        </EntityType>
+        <EntityType Name="Project_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Project_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Study_Year" Type="Int32" Nullable="false" />
+          <Property Name="Client_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Author_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Author_company" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Local_Auth_Study" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Project_Desc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Stusy_Purpose" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Key_Assumption" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Study_Limitation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="User_Reg_ID" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="Created_Date" Type="DateTime" Precision="0" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Scenario_Details" Relationship="Self.FK_Project_Detail_ID" FromRole="Project_Details" ToRole="Scenario_Details" />
+          <NavigationProperty Name="Waste_Mat_Details" Relationship="Self.FK_Project_Details_ID" FromRole="Project_Details" ToRole="Waste_Mat_Details" />
+          <NavigationProperty Name="User_Registration" Relationship="Self.FK_User_Reg_ID" FromRole="Project_Details" ToRole="User_Registration" />
+        </EntityType>
+        <EntityType Name="Provience_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Provience_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="Created_Date" Type="DateTime" Precision="0" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Municipality_Master" Relationship="Self.FK_Provience_Master_ID" FromRole="Provience_Master" ToRole="Municipality_Master" />
+        </EntityType>
+        <EntityType Name="Scenario_Connection_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Scenario_ID" Type="Int32" Nullable="false" />
+          <Property Name="Connection_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Page_Source_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Page_Target_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Scenario_Details" Relationship="Self.FK_Scenario_Connection_Details_Scenario_Details" FromRole="Scenario_Connection_Details" ToRole="Scenario_Details" />
+        </EntityType>
+        <EntityType Name="Scenario_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Project_ID" Type="Int32" Nullable="false" />
+          <Property Name="Scenario_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="Created_Date" Type="DateTime" Precision="0" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="0" />
+          <Property Name="Created_By" Type="Int32" />
+          <Property Name="Modified_By" Type="Int32" />
+          <Property Name="IsDefault" Type="Byte" />
+          <Property Name="Category_ID" Type="Int32" Nullable="false" />
+          <Property Name="Number_Of_Elements" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category_Master" Relationship="Self.FK__Scenario___Categ__5DCAEF64" FromRole="Scenario_Details" ToRole="Category_Master" />
+          <NavigationProperty Name="Project_Details" Relationship="Self.FK_Project_Detail_ID" FromRole="Scenario_Details" ToRole="Project_Details" />
+          <NavigationProperty Name="Scenario_Connection_Details" Relationship="Self.FK_Scenario_Connection_Details_Scenario_Details" FromRole="Scenario_Details" ToRole="Scenario_Connection_Details" />
+          <NavigationProperty Name="Scenario_Node_details" Relationship="Self.FK_Scenario_Node_details_Scenario_Details1" FromRole="Scenario_Details" ToRole="Scenario_Node_details" />
+        </EntityType>
+        <EntityType Name="Scenario_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Scenario_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Image_File" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Scenario_Node_details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Scenario_ID" Type="Int32" Nullable="false" />
+          <Property Name="Block_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Waste_Tech_ID" Type="Int32" Nullable="false" />
+          <Property Name="Position_X" Type="Int32" Nullable="false" />
+          <Property Name="Position_Y" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Scenario_Details" Relationship="Self.FK_Scenario_Node_details_Scenario_Details1" FromRole="Scenario_Node_details" ToRole="Scenario_Details" />
+          <NavigationProperty Name="Waste_tech_Master" Relationship="Self.FK_Scenario_Node_details_Scenario_Details" FromRole="Scenario_Node_details" ToRole="Waste_tech_Master" />
+        </EntityType>
+        <EntityType Name="User_Permission_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Permimssion_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="page_URL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="Created_Date" Type="DateTime" Precision="0" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="User_Role_Permission" Relationship="Self.FK_User_Permission_Master_ID" FromRole="User_Permission_Master" ToRole="User_Role_Permission" />
+        </EntityType>
+        <EntityType Name="User_Registration">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="User_Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="User_Mobile" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="User_Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="User_Role_ID" Type="Int32" Nullable="false" />
+          <Property Name="Created_Date" Type="DateTime" Precision="0" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Project_Details" Relationship="Self.FK_User_Reg_ID" FromRole="User_Registration" ToRole="Project_Details" />
+          <NavigationProperty Name="User_Role_Master" Relationship="Self.FK_User_Role_Master_ID" FromRole="User_Registration" ToRole="User_Role_Master" />
+        </EntityType>
+        <EntityType Name="User_Role_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="Created_Date" Type="DateTime" Precision="0" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="User_Registration" Relationship="Self.FK_User_Role_Master_ID" FromRole="User_Role_Master" ToRole="User_Registration" />
+          <NavigationProperty Name="User_Role_Permission" Relationship="Self.FK__User_Role_Master_ID" FromRole="User_Role_Master" ToRole="User_Role_Permission" />
+        </EntityType>
+        <EntityType Name="User_Role_Permission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Role_ID" Type="Int32" Nullable="false" />
+          <Property Name="User_Permission_ID" Type="Int32" Nullable="false" />
+          <Property Name="Created_Date" Type="DateTime" Precision="0" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="User_Permission_Master" Relationship="Self.FK_User_Permission_Master_ID" FromRole="User_Role_Permission" ToRole="User_Permission_Master" />
+          <NavigationProperty Name="User_Role_Master" Relationship="Self.FK__User_Role_Master_ID" FromRole="User_Role_Permission" ToRole="User_Role_Master" />
+        </EntityType>
+        <EntityType Name="Waste_Mat_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Project_ID" Type="Int32" Nullable="false" />
+          <Property Name="Waste_Mat_ID" Type="Int32" Nullable="false" />
+          <Property Name="Waste_Mat_Amt" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Waste_mat_Percentage" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Waste_Amt" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="Created_Date" Type="DateTime" Precision="0" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="0" />
+          <Property Name="Created_By" Type="Int32" />
+          <Property Name="Modified_By" Type="Int32" />
+          <NavigationProperty Name="Project_Details" Relationship="Self.FK_Project_Details_ID" FromRole="Waste_Mat_Details" ToRole="Project_Details" />
+          <NavigationProperty Name="Waste_Mat_Master" Relationship="Self.FK_Waste_Mat_Master_ID" FromRole="Waste_Mat_Details" ToRole="Waste_Mat_Master" />
+        </EntityType>
+        <EntityType Name="Waste_Mat_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Waste_Mat_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="Created_Date" Type="DateTime" Precision="0" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Waste_Mat_Details" Relationship="Self.FK_Waste_Mat_Master_ID" FromRole="Waste_Mat_Master" ToRole="Waste_Mat_Details" />
+        </EntityType>
+        <EntityType Name="Waste_tech_Master">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Waste_Tech_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="Created_Date" Type="DateTime" Precision="0" />
+          <Property Name="Modified_Date" Type="DateTime" Precision="0" />
+          <Property Name="Category_Master_ID" Type="Int32" />
+          <NavigationProperty Name="Category_Master" Relationship="Self.FK__Waste_tec__Categ__5535A963" FromRole="Waste_tech_Master" ToRole="Category_Master" />
+          <NavigationProperty Name="Scenario_Node_details" Relationship="Self.FK_Scenario_Node_details_Scenario_Details" FromRole="Waste_tech_Master" ToRole="Scenario_Node_details" />
+        </EntityType>
+        <Association Name="FK__Scenario___Categ__5DCAEF64">
+          <End Role="Category_Master" Type="Self.Category_Master" Multiplicity="1" />
+          <End Role="Scenario_Details" Type="Self.Scenario_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Scenario_Details">
+              <PropertyRef Name="Category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Waste_tec__Categ__5535A963">
+          <End Role="Category_Master" Type="Self.Category_Master" Multiplicity="0..1" />
+          <End Role="Waste_tech_Master" Type="Self.Waste_tech_Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Waste_tech_Master">
+              <PropertyRef Name="Category_Master_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provience_Master_ID">
+          <End Role="Provience_Master" Type="Self.Provience_Master" Multiplicity="1" />
+          <End Role="Municipality_Master" Type="Self.Municipality_Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provience_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Municipality_Master">
+              <PropertyRef Name="Provience_Master_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Detail_ID">
+          <End Role="Project_Details" Type="Self.Project_Details" Multiplicity="1" />
+          <End Role="Scenario_Details" Type="Self.Scenario_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project_Details">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Scenario_Details">
+              <PropertyRef Name="Project_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Details_ID">
+          <End Role="Project_Details" Type="Self.Project_Details" Multiplicity="1" />
+          <End Role="Waste_Mat_Details" Type="Self.Waste_Mat_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project_Details">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Waste_Mat_Details">
+              <PropertyRef Name="Project_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Reg_ID">
+          <End Role="User_Registration" Type="Self.User_Registration" Multiplicity="1" />
+          <End Role="Project_Details" Type="Self.Project_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Registration">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Project_Details">
+              <PropertyRef Name="User_Reg_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scenario_Connection_Details_Scenario_Details">
+          <End Role="Scenario_Details" Type="Self.Scenario_Details" Multiplicity="1" />
+          <End Role="Scenario_Connection_Details" Type="Self.Scenario_Connection_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scenario_Details">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Scenario_Connection_Details">
+              <PropertyRef Name="Scenario_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scenario_Node_details_Scenario_Details1">
+          <End Role="Scenario_Details" Type="Self.Scenario_Details" Multiplicity="1" />
+          <End Role="Scenario_Node_details" Type="Self.Scenario_Node_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scenario_Details">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Scenario_Node_details">
+              <PropertyRef Name="Scenario_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scenario_Node_details_Scenario_Details">
+          <End Role="Waste_tech_Master" Type="Self.Waste_tech_Master" Multiplicity="1" />
+          <End Role="Scenario_Node_details" Type="Self.Scenario_Node_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Waste_tech_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Scenario_Node_details">
+              <PropertyRef Name="Waste_Tech_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Permission_Master_ID">
+          <End Role="User_Permission_Master" Type="Self.User_Permission_Master" Multiplicity="1" />
+          <End Role="User_Role_Permission" Type="Self.User_Role_Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Permission_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Role_Permission">
+              <PropertyRef Name="User_Permission_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role_Master_ID">
+          <End Role="User_Role_Master" Type="Self.User_Role_Master" Multiplicity="1" />
+          <End Role="User_Registration" Type="Self.User_Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Role_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Registration">
+              <PropertyRef Name="User_Role_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Role_Master_ID">
+          <End Role="User_Role_Master" Type="Self.User_Role_Master" Multiplicity="1" />
+          <End Role="User_Role_Permission" Type="Self.User_Role_Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Role_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Role_Permission">
+              <PropertyRef Name="User_Role_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Waste_Mat_Master_ID">
+          <End Role="Waste_Mat_Master" Type="Self.Waste_Mat_Master" Multiplicity="1" />
+          <End Role="Waste_Mat_Details" Type="Self.Waste_Mat_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Waste_Mat_Master">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Waste_Mat_Details">
+              <PropertyRef Name="Waste_Mat_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WROSEDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Category_Master" EntityType="Self.Category_Master" />
+          <EntitySet Name="Municipality_Master" EntityType="Self.Municipality_Master" />
+          <EntitySet Name="Project_Details" EntityType="Self.Project_Details" />
+          <EntitySet Name="Provience_Master" EntityType="Self.Provience_Master" />
+          <EntitySet Name="Scenario_Connection_Details" EntityType="Self.Scenario_Connection_Details" />
+          <EntitySet Name="Scenario_Details" EntityType="Self.Scenario_Details" />
+          <EntitySet Name="Scenario_Master" EntityType="Self.Scenario_Master" />
+          <EntitySet Name="Scenario_Node_details" EntityType="Self.Scenario_Node_details" />
+          <EntitySet Name="User_Permission_Master" EntityType="Self.User_Permission_Master" />
+          <EntitySet Name="User_Registration" EntityType="Self.User_Registration" />
+          <EntitySet Name="User_Role_Master" EntityType="Self.User_Role_Master" />
+          <EntitySet Name="User_Role_Permission" EntityType="Self.User_Role_Permission" />
+          <EntitySet Name="Waste_Mat_Details" EntityType="Self.Waste_Mat_Details" />
+          <EntitySet Name="Waste_Mat_Master" EntityType="Self.Waste_Mat_Master" />
+          <EntitySet Name="Waste_tech_Master" EntityType="Self.Waste_tech_Master" />
+          <AssociationSet Name="FK__Scenario___Categ__5DCAEF64" Association="Self.FK__Scenario___Categ__5DCAEF64">
+            <End Role="Category_Master" EntitySet="Category_Master" />
+            <End Role="Scenario_Details" EntitySet="Scenario_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Waste_tec__Categ__5535A963" Association="Self.FK__Waste_tec__Categ__5535A963">
+            <End Role="Category_Master" EntitySet="Category_Master" />
+            <End Role="Waste_tech_Master" EntitySet="Waste_tech_Master" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provience_Master_ID" Association="Self.FK_Provience_Master_ID">
+            <End Role="Provience_Master" EntitySet="Provience_Master" />
+            <End Role="Municipality_Master" EntitySet="Municipality_Master" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Detail_ID" Association="Self.FK_Project_Detail_ID">
+            <End Role="Project_Details" EntitySet="Project_Details" />
+            <End Role="Scenario_Details" EntitySet="Scenario_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Details_ID" Association="Self.FK_Project_Details_ID">
+            <End Role="Project_Details" EntitySet="Project_Details" />
+            <End Role="Waste_Mat_Details" EntitySet="Waste_Mat_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Reg_ID" Association="Self.FK_User_Reg_ID">
+            <End Role="User_Registration" EntitySet="User_Registration" />
+            <End Role="Project_Details" EntitySet="Project_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scenario_Connection_Details_Scenario_Details" Association="Self.FK_Scenario_Connection_Details_Scenario_Details">
+            <End Role="Scenario_Details" EntitySet="Scenario_Details" />
+            <End Role="Scenario_Connection_Details" EntitySet="Scenario_Connection_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scenario_Node_details_Scenario_Details1" Association="Self.FK_Scenario_Node_details_Scenario_Details1">
+            <End Role="Scenario_Details" EntitySet="Scenario_Details" />
+            <End Role="Scenario_Node_details" EntitySet="Scenario_Node_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scenario_Node_details_Scenario_Details" Association="Self.FK_Scenario_Node_details_Scenario_Details">
+            <End Role="Waste_tech_Master" EntitySet="Waste_tech_Master" />
+            <End Role="Scenario_Node_details" EntitySet="Scenario_Node_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Permission_Master_ID" Association="Self.FK_User_Permission_Master_ID">
+            <End Role="User_Permission_Master" EntitySet="User_Permission_Master" />
+            <End Role="User_Role_Permission" EntitySet="User_Role_Permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role_Master_ID" Association="Self.FK_User_Role_Master_ID">
+            <End Role="User_Role_Master" EntitySet="User_Role_Master" />
+            <End Role="User_Registration" EntitySet="User_Registration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Role_Master_ID" Association="Self.FK__User_Role_Master_ID">
+            <End Role="User_Role_Master" EntitySet="User_Role_Master" />
+            <End Role="User_Role_Permission" EntitySet="User_Role_Permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Waste_Mat_Master_ID" Association="Self.FK_Waste_Mat_Master_ID">
+            <End Role="Waste_Mat_Master" EntitySet="Waste_Mat_Master" />
+            <End Role="Waste_Mat_Details" EntitySet="Waste_Mat_Details" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WROSEModelStoreContainer" CdmEntityContainer="WROSEDBEntities">
+          <EntitySetMapping Name="Category_Master">
+            <EntityTypeMapping TypeName="WROSEModel.Category_Master">
+              <MappingFragment StoreEntitySet="Category_Master">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Municipality_Master">
+            <EntityTypeMapping TypeName="WROSEModel.Municipality_Master">
+              <MappingFragment StoreEntitySet="Municipality_Master">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Municipality_Name" ColumnName="Municipality_Name" />
+                <ScalarProperty Name="Provience_Master_ID" ColumnName="Provience_Master_ID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Project_Details">
+            <EntityTypeMapping TypeName="WROSEModel.Project_Details">
+              <MappingFragment StoreEntitySet="Project_Details">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Project_Name" ColumnName="Project_Name" />
+                <ScalarProperty Name="Study_Year" ColumnName="Study_Year" />
+                <ScalarProperty Name="Client_Name" ColumnName="Client_Name" />
+                <ScalarProperty Name="Author_Name" ColumnName="Author_Name" />
+                <ScalarProperty Name="Author_company" ColumnName="Author_company" />
+                <ScalarProperty Name="Local_Auth_Study" ColumnName="Local_Auth_Study" />
+                <ScalarProperty Name="Project_Desc" ColumnName="Project_Desc" />
+                <ScalarProperty Name="Stusy_Purpose" ColumnName="Stusy_Purpose" />
+                <ScalarProperty Name="Key_Assumption" ColumnName="Key_Assumption" />
+                <ScalarProperty Name="Study_Limitation" ColumnName="Study_Limitation" />
+                <ScalarProperty Name="User_Reg_ID" ColumnName="User_Reg_ID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provience_Master">
+            <EntityTypeMapping TypeName="WROSEModel.Provience_Master">
+              <MappingFragment StoreEntitySet="Provience_Master">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Provience_Name" ColumnName="Provience_Name" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scenario_Connection_Details">
+            <EntityTypeMapping TypeName="WROSEModel.Scenario_Connection_Details">
+              <MappingFragment StoreEntitySet="Scenario_Connection_Details">
+                <ScalarProperty Name="Scenario_ID" ColumnName="Scenario_ID" />
+                <ScalarProperty Name="Connection_ID" ColumnName="Connection_ID" />
+                <ScalarProperty Name="Page_Source_ID" ColumnName="Page_Source_ID" />
+                <ScalarProperty Name="Page_Target_ID" ColumnName="Page_Target_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scenario_Details">
+            <EntityTypeMapping TypeName="WROSEModel.Scenario_Details">
+              <MappingFragment StoreEntitySet="Scenario_Details">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Project_ID" ColumnName="Project_ID" />
+                <ScalarProperty Name="Scenario_Name" ColumnName="Scenario_Name" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+                <ScalarProperty Name="Number_Of_Elements" ColumnName="Number_Of_Elements" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scenario_Master">
+            <EntityTypeMapping TypeName="WROSEModel.Scenario_Master">
+              <MappingFragment StoreEntitySet="Scenario_Master">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Scenario_Name" ColumnName="Scenario_Name" />
+                <ScalarProperty Name="Image_File" ColumnName="Image_File" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scenario_Node_details">
+            <EntityTypeMapping TypeName="WROSEModel.Scenario_Node_details">
+              <MappingFragment StoreEntitySet="Scenario_Node_details">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Scenario_ID" ColumnName="Scenario_ID" />
+                <ScalarProperty Name="Block_ID" ColumnName="Block_ID" />
+                <ScalarProperty Name="Waste_Tech_ID" ColumnName="Waste_Tech_ID" />
+                <ScalarProperty Name="Position_X" ColumnName="Position_X" />
+                <ScalarProperty Name="Position_Y" ColumnName="Position_Y" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Permission_Master">
+            <EntityTypeMapping TypeName="WROSEModel.User_Permission_Master">
+              <MappingFragment StoreEntitySet="User_Permission_Master">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Permimssion_Name" ColumnName="Permimssion_Name" />
+                <ScalarProperty Name="page_URL" ColumnName="page_URL" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Registration">
+            <EntityTypeMapping TypeName="WROSEModel.User_Registration">
+              <MappingFragment StoreEntitySet="User_Registration">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="User_Email" ColumnName="User_Email" />
+                <ScalarProperty Name="User_Mobile" ColumnName="User_Mobile" />
+                <ScalarProperty Name="User_Password" ColumnName="User_Password" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="User_Role_ID" ColumnName="User_Role_ID" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Role_Master">
+            <EntityTypeMapping TypeName="WROSEModel.User_Role_Master">
+              <MappingFragment StoreEntitySet="User_Role_Master">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Role_Permission">
+            <EntityTypeMapping TypeName="WROSEModel.User_Role_Permission">
+              <MappingFragment StoreEntitySet="User_Role_Permission">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="User_Role_ID" ColumnName="User_Role_ID" />
+                <ScalarProperty Name="User_Permission_ID" ColumnName="User_Permission_ID" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Waste_Mat_Details">
+            <EntityTypeMapping TypeName="WROSEModel.Waste_Mat_Details">
+              <MappingFragment StoreEntitySet="Waste_Mat_Details">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Project_ID" ColumnName="Project_ID" />
+                <ScalarProperty Name="Waste_Mat_ID" ColumnName="Waste_Mat_ID" />
+                <ScalarProperty Name="Waste_Mat_Amt" ColumnName="Waste_Mat_Amt" />
+                <ScalarProperty Name="Waste_mat_Percentage" ColumnName="Waste_mat_Percentage" />
+                <ScalarProperty Name="Total_Waste_Amt" ColumnName="Total_Waste_Amt" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Waste_Mat_Master">
+            <EntityTypeMapping TypeName="WROSEModel.Waste_Mat_Master">
+              <MappingFragment StoreEntitySet="Waste_Mat_Master">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Waste_Mat_Name" ColumnName="Waste_Mat_Name" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Waste_tech_Master">
+            <EntityTypeMapping TypeName="WROSEModel.Waste_tech_Master">
+              <MappingFragment StoreEntitySet="Waste_tech_Master">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Waste_Tech_Name" ColumnName="Waste_Tech_Name" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+                <ScalarProperty Name="Category_Master_ID" ColumnName="Category_Master_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

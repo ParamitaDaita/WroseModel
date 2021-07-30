@@ -1,0 +1,346 @@
+﻿<div class="row" id="divStep1">
+    <div class="col-md-12">
+        <div class="text-center">
+            <h5>Will you upload your data manually or automated?</h5>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-12 text-center">
+                <button id="btnManual" name="btnManual" type="button" class="btn btn-primary text-uppercase">Manually</button>
+                <button id="btnAuto" name="btnAuto" type="button" class="btn btn-primary text-uppercase">Automated</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" id="divStep2">
+    <div class="col-md-12">
+        <div class="text-center">
+            <h4>Add Waster Materials</h4>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-5">
+                <table width="100%" style="border:1px solid black; min-height:100px" id="selectFrom">
+                    <tr style="border-bottom:1px solid black" id="trSelectFrom">
+                        <td width="20px">
+                            <input type="checkbox" id="chkSelectAllFrom" class="" value="Select All" />
+                        </td>
+                        <td width="100px">
+                            Select All
+                        </td>
+                    </tr>
+                    @foreach (var item in (List<SelectListItem>)ViewBag.WasteMat)
+                    {
+                        <tr>
+                            <td width="20px">
+                                <input type="checkbox" id="@item.Value" class="chkclass" value="@item.Text" />
+                            </td>
+                            <td id="@item.Value" width="100px">
+                                @item.Text
+                            </td>
+                        </tr>
+                    }
+                </table>
+                @*@Html.ListBox("selectFrom", (List<SelectListItem>)ViewBag.WasteMat, new { @class = "form-control", @id = "selectFrom" })*@
+            </div>
+            <div class="col-md-2">
+                <button id="btnAdd" name="btnAdd" type="button" class="btn btn-primary btn-small" style="margin-bottom:5px;width:100px">Add <i class="fa fa-arrow-right"></i></button>
+                <button id="btnRemove" name="btnRemove" type="button" class="btn btn-primary btn-small"><i class="fa fa-arrow-left"></i> Remove</button>
+            </div>
+            <div class="col-md-5">
+                @*<select name="selectTo" id="selectTo" class="form-control" multiple="multiple">
+                    </select>*@
+                <table width="100%" id="selectTo" style="border:1px solid black;min-height:100px">
+                    <tr style="border-bottom:1px solid black" id="trSelectTo">
+                        <td width="20px">
+                            <input type="checkbox" id="chkSelectAllTo" class="" value="Select All" />
+                        </td>
+                        <td width="100px">
+                            Select All
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-12 text-right">
+                <button id="btnNext" name="btnNext" type="button" class="btn btn-primary">Next</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" id="divManual">
+    <div class="col-md-12">
+        <div class="text-left">
+            <h5>Manual data upload</h5>
+            <h6>Enter data values for each waste item</h6>
+            <div class="col-md-12">
+                    <input type="radio" id="rdbAmount" name="radioSelection" value="1" checked="checked">
+                    <label for="html">Amount</label>
+                    <input type="radio" id="rdbPercentage" name="radioSelection" value="2">
+                    <label for="css">Percentage</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label class="col-md-4">Total Waste Material (Tons)</label>
+                <div class="col-md-6">
+                    <input type="text" id="txtTotalAmount" class="form-control col-md-4" value="0" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group" id="divManualList">
+
+        </div>
+        <div class="form-group text-center">
+            <input type="button" id="btnSaveWasteMat" value="Submit" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+<div class="row" id="divAutomated">
+    <div class="col-md-12">
+        <div class="text-left">
+            <h5>Automated data upload</h5>
+            <h6>Load municipality data</h6>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                @using (Html.BeginForm("Upload", "Project", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="col-md-12">
+                        <input type="file" name="UploadedFile" />
+                        <input type="submit" id="btnSaveWasteMatAutomaed" value="Load Data" class="btn btn-primary" />
+                    </div>
+                }
+            </div>
+        </div>
+        @*<div class="form-group" id="divAutomatedData">
+
+            </div>*@
+        @*<div class="form-group">
+                <input type="button" id="btnSaveWasteMatAutomaed" value="Save" class="btn btn-primary" />
+            </div>*@
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#trSelectTo").hide();
+        //$("#txtTotalAmount").prop('disabled', true);
+        $('#divStep2').hide();
+        $('#divManual').hide();
+        $('#divAutomated').hide();
+
+        $('#btnAdd').click(function () {
+            $("#chkSelectAllTo").prop('checked', false);
+            $('input[class=chkclass]:checkbox:checked').each(function () {
+                $('#selectTo').append('<tr><td width="20px"><input type="checkbox" id="' + $(this).attr('id') + '" class="chkclass" value="' + $(this).attr('value') + '" /></td><td id="' + $(this).attr('id') + '" width="100px">' + $(this).attr('value') + '</td>')
+                $(this).parent().parent().remove();
+            });
+            var countcheckboxFrom = $("#selectFrom input[class=chkclass]").length;
+            if (countcheckboxFrom == 0) {
+                $("#chkSelectAllFrom").prop('checked', false);
+                $("#trSelectFrom").hide();
+            }
+            var countcheckboxTo = $("#selectTo input[class=chkclass]").length;
+            if (countcheckboxTo > 0) {
+                $("#trSelectTo").show();
+            }
+
+        });
+        $('#btnRemove').click(function () {
+            $("#chkSelectAllFrom").prop('checked', false);
+            $('input[class=chkclass]:checkbox:checked').each(function () {
+                $('#selectFrom').append('<tr><td width="20px"><input type="checkbox" id="' + $(this).attr('id') + '" class="chkclass" value="' + $(this).attr('value') + '" /></td><td id="' + $(this).attr('id') + '" width="100px">' + $(this).attr('value') + '</td>')
+                //$("#trSelectTo").remove();
+                $(this).parent().parent().remove();
+            });
+            var countcheckboxTo = $("#selectTo input[class=chkclass]").length;
+            if (countcheckboxTo == 0) {
+                $("#chkSelectAllTo").prop('checked', false);
+                $("#trSelectTo").hide();
+            }
+            var countcheckboxFrom = $("#selectFrom input[class=chkclass]").length;
+            if (countcheckboxFrom >0) {
+                $("#trSelectFrom").show();
+            }
+        });
+        $("#chkSelectAllFrom").change(function () {
+            if (this.checked) {
+                $("#selectFrom .chkclass").each(function () {
+                    this.checked = true;
+                });
+            } else {
+                $(".chkclass").each(function () {
+                    this.checked = false;
+                });
+            }
+        });
+        $("#selectFrom .chkclass").click(function () {
+            if ($(this).is(":checked")) {
+                var isAllChecked = 0;
+
+                $("#selectFrom .chkclass").each(function () {
+                    if (!this.checked)
+                        isAllChecked = 1;
+                });
+
+                if (isAllChecked == 0) {
+                    $("#chkSelectAllFrom").prop("checked", true);
+                }
+            }
+            else {
+                $("#chkSelectAllFrom").prop("checked", false);
+            }
+        });
+
+        $("#chkSelectAllTo").change(function () {
+            if (this.checked) {
+                $("#selectTo .chkclass").each(function () {
+                    this.checked = true;
+                });
+            } else {
+                $(".chkclass").each(function () {
+                    this.checked = false;
+                });
+            }
+        });
+        $(document).on("click", "#selectTo input[class=chkclass]:checkbox", function (event) {
+            if ($(this).is(":checked")) {
+                var isAllItemChecked = 0;
+
+                $("#selectTo .chkclass").each(function () {
+                    if (!this.checked)
+                        isAllItemChecked = 1;
+                });
+
+                if (isAllItemChecked == 0) {
+                    $("#chkSelectAllTo").prop("checked", true);
+                }
+            }
+            else {
+                $("#chkSelectAllTo").prop("checked", false);
+            }
+        });
+        $('#btnNext').click(function () {
+            $('#divStep2').hide();
+            $('#divStep1').hide();
+            $('#divManual').show();
+            $('#divAutomated').hide();
+            var i = 1;
+            $('#selectTo input[class=chkclass]').each(function () {
+                $('#divManualList').append('<div class="row"><label class="col-md-4" for="wastemat_name" data-id='+$(this).attr('id')+' value=' + $(this).attr('value') + '>' + $(this).attr('value') + '</label><div class="col-md-6"><input type="text" class="form-control amount" id="txtWasteAmt' + i + '" data-input="' + i + '"></input></div><div class="col-md-2"><input type="text" class="form-control wastePer" style="" id="txtWastePercent' + i + '" data-input="' + i +'">%</input></div></div><br/>');
+                $("#txtWastePercent" + i).prop('disabled', true);
+                $("#txtWasteAmt" + i).prop('disabled', true);
+                i++;
+            });
+        });
+        $('#btnManual').click(function () {
+            $('#divStep2').show();
+            $('#divStep1').hide();
+            $('#divAutomated').hide();
+            $('#divManual').hide();
+        });
+        $('#btnAuto').click(function () {
+            $('#divStep2').hide();
+            $('#divStep1').hide();
+            $('#divManual').hide();
+            $('#divAutomated').show();
+        });
+        $(document).on('change', '.amount', function () {
+            //$('#txtTotalAmount').val('0');
+            //var totalAmount = parseInt($('#txtTotalAmount').val(), 10);
+            //$('.amount').each(function () {
+            //    if ($(this).val() != "") {
+            //        var currentValue = parseInt($(this).val(), 10);
+            //        totalAmount += currentValue;
+            //        var percentValue = (currentValue / totalAmount) * 100;
+            //        var idValue = $(this).attr('data-input');
+            //    }
+            //});
+
+            //$('#txtTotalAmount').val(totalAmount);
+            $('.amount').each(function () {
+                if ($(this).val() != "") {
+                    var currentValue = parseInt($(this).val(), 10);
+                    var percentValue = (currentValue / parseInt($('#txtTotalAmount').val())) * 100;
+                    var idValue = $(this).attr('data-input');
+                    $("#txtWastePercent" + idValue).val(percentValue.toFixed(2));
+                }
+            });
+        });
+        $(document).on('change', '.wastePer', function () {
+            $('.wastePer').each(function () {
+                if ($(this).val() != "") {
+                    var currentValue = parseInt($(this).val(), 10);
+                    var amount = (parseInt($('#txtTotalAmount').val())* currentValue) / 100;
+                    var idValue = $(this).attr('data-input');
+                    $("#txtWasteAmt" + idValue).val(amount.toFixed(2));
+                }
+            });
+        });
+    });
+    $('#btnSaveWasteMat').on('click', function () {
+        var wasteMatsDetails = new Array();
+        $("#divManualList .row").each(function () {
+            var row = $(this);
+            var wasteMatDetails = {};
+            wasteMatDetails.Waste_Mat_ID = row.find("label[for =wastemat_name]").attr('data-id');
+            wasteMatDetails.Waste_Mat_Amt = row.find('.amount').val();
+            wasteMatDetails.Waste_mat_Percentage = row.find('.wastePer').val();
+            wasteMatDetails.Total_Waste_Amt = $('#txtTotalAmount').val();
+            wasteMatsDetails.push(wasteMatDetails);
+        });
+        $.ajax({
+            type: "POST",
+            url: "/Project/SaveWasteMat",
+            data: JSON.stringify(wasteMatsDetails),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                if (response != null) {
+                    location.reload(true);
+                } else {
+                    alert("Something went wrong");
+                }
+            }
+        });
+    });
+    
+    $('input[type=radio][name=radioSelection]').change(function () {
+        if (this.value == '1') {
+            if ($('#txtTotalAmount').val() > 0) {
+                $('.amount').prop('disabled', false);
+                $('.wastePer').prop('disabled', true);
+            }
+            else {
+                $('.amount').prop('disabled', true);
+                $('.wastePer').prop('disabled', true);
+            }
+        }
+        else if (this.value == '2') {
+            if ($('#txtTotalAmount').val() > 0) {
+                $('.wastePer').prop('disabled', false);
+                $('.amount').prop('disabled', true);
+            }
+            else {
+                $('.wastePer').prop('disabled', true);
+                $('.amount').prop('disabled', true);
+            }
+        }
+    });
+    $("#txtTotalAmount").on('keyup', function () {
+        if ($('#txtTotalAmount').val() > 0) {
+            if ($('input[type=radio][name=radioSelection]:checked').val() == '1') {
+                $('.amount').prop('disabled', false);
+                $('.wastePer').prop('disabled', true);
+            }
+            else  {
+                $('.amount').prop('disabled', true);
+                $('.wastePer').prop('disabled', false);
+            }
+        }
+        else {
+            $('.amount').prop('disabled', true);
+            $('.wastePer').prop('disabled', true);
+        }
+    });
+</script>
+
